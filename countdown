@@ -25,11 +25,22 @@
         #countdown {
             font-size: 5vw;
         }
+        #startButton {
+            padding: 10px 20px;
+            font-size: 2vw;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
-<body onload="startFullScreen()">
+<body>
 
-    <div id="title">Noch<br><span id="countdown"></span><br>bis ihr Versagers mir ausgeliefert seid</div>
+    <button id="startButton" onclick="startFullScreen()">Start Countdown</button>
+
+    <div id="title" style="display: none;">Noch <span id="countdown"></span> bis zur Krönung zur Nr.1 zum zweiten Mal in Folge von Lukas Fritschi</div>
 
     <audio id="whistle" src="https://www.soundjay.com/button/sounds/beep-07.mp3"></audio>
 
@@ -44,6 +55,8 @@
             } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
                 document.documentElement.msRequestFullscreen();
             }
+            document.getElementById("startButton").style.display = "none";
+            document.getElementById("title").style.display = "block";
             startCountdown();
         }
 
