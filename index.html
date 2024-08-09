@@ -46,6 +46,7 @@
 
     <script>
         function startFullScreen() {
+            // Start full screen mode
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
             } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -55,8 +56,16 @@
             } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
                 document.documentElement.msRequestFullscreen();
             }
+            // Hide the start button and show the countdown
             document.getElementById("startButton").style.display = "none";
             document.getElementById("title").style.display = "block";
+
+            // Preload and play the sound immediately
+            var whistleSound = document.getElementById("whistle");
+            whistleSound.play().catch(function(error) {
+                console.log('Audio playback failed:', error);
+            });
+
             startCountdown();
         }
 
@@ -80,10 +89,14 @@
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Output the result in an element with id="countdown"
-                document.getElementById("countdown").innerHTML = days + " Tage " + hours + " Stunden " + <br> + minutes + " Minuten " + seconds + " Sekunden ";
+                document.getElementById("countdown").innerHTML = 
+                    days + " Tage " + hours + " Stunden <br>" + 
+                    minutes + " Minuten " + seconds + " Sekunden ";
 
                 // Play the whistle sound
-                document.getElementById("whistle").play();
+                document.getElementById("whistle").play().catch(function(error) {
+                    console.log('Audio playback failed:', error);
+                });
 
                 // If the count down is finished, write some text 
                 if (distance < 0) {
